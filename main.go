@@ -16,21 +16,21 @@ func main() {
 		fmt.Println("Error occured while connecting to DB", err)
 	}
 
-	user1 := User{
-		FirstName:   "Abdullah",
-		LastName:    "Nettoor",
-		Email:       "abdullahnettoor@gmail.com",
-		DateOfBirth: time.Date(1997, 12, 06, 0, 0, 0, 0, time.UTC),
-	}
-
-	err = db.AutoMigrate(&user1)
+	err = db.AutoMigrate(User{})
 	if err != nil {
 		fmt.Println("\n\nError migrating user:", err)
 	} else {
 		fmt.Println("\n\nError is", err)
 	}
 
-	db.Create(&user1)
+	user := User{
+		FirstName:   "Abdullah",
+		LastName:    "Nettoor",
+		Email:       "abdullahnettoor@gmail.com",
+		DateOfBirth: time.Date(1997, 12, 06, 0, 0, 0, 0, time.UTC),
+	}
+
+	db.Create(&user)
 	if db.Error != nil {
 		fmt.Println("Error Creating user:", err)
 		return
